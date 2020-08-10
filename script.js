@@ -6,14 +6,14 @@ const twitterBtn = document.getElementById('twitter');
 const newquoteBtn = document.getElementById('new-quote');
 const loader = document.getElementById('loader');
 
-// Show loading
-function loading() {
+// Show loading spinner
+function showSpinner() {
   loader.hidden = false;
   quoteContainer.hidden = true;
 }
 
-// Hide loading
-function complete() {
+// Hide loading spinner
+function hideSpinner() {
   if (!loader.hidden) {
     quoteContainer.hidden = false;
     loader.hidden = true;
@@ -22,7 +22,8 @@ function complete() {
 
 // Get quote from Api
 async function getQuote() {
-  loading();
+  // show the spinner
+  showSpinner();
   const apiUrl = 'https://sjm-api-proxy.herokuapp.com/api/airquote/random';
 
   try {
@@ -49,7 +50,7 @@ async function getQuote() {
     console.log(data);
 
     // stop loader and show quote
-    complete();
+    hideSpinner();
   } catch (error) {
     console.log('whooops, no quote!', error);
   }
